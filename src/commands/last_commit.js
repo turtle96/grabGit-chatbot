@@ -3,9 +3,12 @@ var moment = require('moment');
 var request = require('request');
  
 // A case‐insensitive regular expression that matches "/last" 
-var commandRegex = /^\/last/i; 
+var commandRegex = /^\/last\s+(.+)\s+(.+)/i; 
  
 bot.onText(commandRegex, function(msg, match) { 
+	var repoOwner = match[1];
+  	var repoName = match[2];
+
     var replyChatId = msg.chat.id; 
     if (msg.chat.type !== 'private') { 
         // this is a group message, so let's ignore it 
@@ -14,19 +17,7 @@ bot.onText(commandRegex, function(msg, match) {
  
     var messageOptions = { parse_mode: 'Markdown' }; 
 
-    console.log(msg.text);
-
-    var parameters = msg.text.split("/last ");
-    parameters = parameters[1];
-
-    if (!parameters) {
-    	bot.sendMessage(replyChatId, "Please enter owner/repo :D", messageOptions);
-    	return;
-    }
-
-    console.log(parameters);
-
-    var url = "https://api.github.com/repos/" + parameters + "/commits";
+    var url = "https://api.github.com/repos/"+repoOwner+"/"+repoName+"/commits";
 
     var reply = "reply";
 
@@ -44,8 +35,8 @@ bot.onText(commandRegex, function(msg, match) {
 
 	    var date = moment(commit.committer.date);
 
-	    reply = "Last commit written by " + commit.author.name + " " + date.fromNow()
-	    	+ "\nCommit message is:\n" + commit.message;
+	    reply = "Last commit written by:\n*" + commit.author.name + "* _" + date.fromNow()
+	    	+ "_\nCommit message is:\n" + commit.message;
 
 	    bot.sendMessage(replyChatId, reply, messageOptions);
 	  }

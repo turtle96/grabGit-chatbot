@@ -1,10 +1,15 @@
 var bot = require('../bot');
 // need to edit the command and make it accept a parameter
-var commandRegex = /^\/top3/i;
+var commandRegex = /^\/top3\s+(.+)\s+(.+)/i;
 
-var url = "https://api.github.com/repos/tungnk1993/scrapy/stats/contributors";
+var url;
 
 bot.onText(commandRegex, function(msg, match) {
+  var repoOwner = match[1];
+  var repoName = match[2];
+
+  url = "https://api.github.com/repos/"+repoOwner+"/"+repoName+"/stats/contributors";
+
   var replyChatId = msg.chat.id;
   if (msg.chat.type !== 'private') {
     // this is a group message, so let's ignore it

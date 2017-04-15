@@ -21,12 +21,12 @@ function formatMessage() {
 	var msg = "If you are new to our bot," +
 		" here are some commands to try out\n\n"
 
-	var top3 = "/top3 repoOwner repoName - " +
-		"returns the top 3 contributors of a Repo"
-	var top = "/toprecent repoOwner repoName - " +
-		"returns the top contributor of a Repo in the last week"
-	var last = "/last repoOwner repoName - " +
-		"returns information about the latest commit"
+  var top3 = "/top3 repoOwner repoName - " +
+    "shows the top 3 contributors of a Repo"
+  var top = "/toprecent repoOwner repoName - " +
+    "shows the top contributor of a Repo in the last week"
+  var last = "/last repoOwner repoName - " +
+    "shows information about the latest commit"
 
 	return msg + top3 + "\n" + top + "\n" + last
 }

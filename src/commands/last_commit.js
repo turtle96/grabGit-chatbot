@@ -41,7 +41,11 @@ bot.onText(commandRegex, function(msg, match) {
 	    bot.sendMessage(replyChatId, reply, messageOptions);
 	  }
 	  else {
-	  	bot.sendMessage(replyChatId, "Seems like there's an error, please try again.", messageOptions);
+	      bot.sendMessage(replyChatId,
+		      "Oops..It seems like you have type the wrong repo name or owner.\n" +
+		      "It could also be that we have have reached maximum github API calls for the day.\n" +
+		      "Thanks for using our bot!",
+		      messageOptions);
 	  }
 	}
 

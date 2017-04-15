@@ -57,7 +57,11 @@ function getAnswer(replyChatId, messageOptions) {
                   formattedResult,
                   messageOptions);
     } else {
-      console.log("err");
+      bot.sendMessage(replyChatId,
+            "Oops..It seems like you have type the wrong repo name or owner.\n" +
+            "It could also be that we have have reached maximum github API calls for the day.\n" +
+            "Thanks for using our bot!",
+            messageOptions);
     }
   });
   

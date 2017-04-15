@@ -4,7 +4,8 @@ var request = require('request');
  
 // A case‐insensitive regular expression that matches "/last" 
 var commandRegex = /^\/last\s+(.+)\s+(.+)/i;
- 
+var invalidCommandRegex = /^\/last$/i; 
+
 bot.onText(commandRegex, function(msg, match) { 
 	var repoOwner = match[1];
   	var repoName = match[2];
@@ -51,4 +52,18 @@ bot.onText(commandRegex, function(msg, match) {
 
 	request(options, callback);
      
+});
+
+bot.onText(invalidCommandRegex, function(msg, match) { 
+    var replyChatId = msg.chat.id; 
+    if (msg.chat.type !== 'private') { 
+        // this is a group message, so let's ignore it 
+       return;  
+    } 
+ 
+    var messageOptions = { parse_mode: 'Markdown' }; 
+    bot.sendMessage(replyChatId, 
+                   "Please input repo name and owner e.g.\n" + 
+                   "/last scrapy scrapy", 
+                   messageOptions); 
 });

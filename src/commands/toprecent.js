@@ -6,6 +6,7 @@ var sevenDaysAgo = now.subtract(7, 'days');
 
 // need to edit the command and make it accept a parameter
 var commandRegex = /^\/toprecent\s+(.+)\s+(.+)/i;
+var invalidCommandRegex = /^\/toprecent$/i; 
 
 bot.onText(commandRegex, function(msg, match) {
   var repoOwner = match[1];
@@ -21,6 +22,10 @@ bot.onText(commandRegex, function(msg, match) {
   var messageOptions = { parse_mode: 'Markdown' };
 
   var output = getAnswer(replyChatId, messageOptions);
+
+  if (output == "") {
+    output = "Oh no!\nThere's no commits in recent week."
+  }
 
 
 
@@ -100,6 +105,20 @@ function assocArrToNumericArr(countCommitByAuthor){
 
   return result;
 }
+
+bot.onText(invalidCommandRegex, function(msg, match) { 
+    var replyChatId = msg.chat.id; 
+    if (msg.chat.type !== 'private') { 
+        // this is a group message, so let's ignore it 
+       return;  
+    } 
+ 
+    var messageOptions = { parse_mode: 'Markdown' }; 
+    bot.sendMessage(replyChatId, 
+                   "Please input repo name and owner e.g.\n" + 
+                   "/toprecent scrapy scrapy", 
+                   messageOptions); 
+});
 
 /* Format result to output to client*/
 function formatResult(result){

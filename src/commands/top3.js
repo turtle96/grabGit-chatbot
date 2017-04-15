@@ -1,6 +1,7 @@
 var bot = require('../bot');
 // need to edit the command and make it accept a parameter
 var commandRegex = /^\/top3\s+(.+)\s+(.+)/i;
+var invalidCommandRegex = /^\/top3$/i; 
 
 var url;
 
@@ -62,6 +63,20 @@ function getAnswer(replyChatId, messageOptions) {
   return "Processing...";
 
 }
+
+bot.onText(invalidCommandRegex, function(msg, match) { 
+    var replyChatId = msg.chat.id; 
+    if (msg.chat.type !== 'private') { 
+        // this is a group message, so let's ignore it 
+       return;  
+    } 
+ 
+    var messageOptions = { parse_mode: 'Markdown' }; 
+    bot.sendMessage(replyChatId, 
+                   "Please input repo name and owner e.g.\n" + 
+                   "/top3 scrapy scrapy", 
+                   messageOptions); 
+});
 
 function sortDes() {
   return function(a,b){

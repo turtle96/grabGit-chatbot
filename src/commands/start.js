@@ -30,5 +30,5 @@ function formatMessage() {
 	var last = "/last repoOwner repoName - " +
 		"shows information about the latest commit"
 
-	return msg + top3 + "\n" + top + "\n" + last
+	return msg + help + "\n" + top3 + "\n" + top + "\n" + last
 }

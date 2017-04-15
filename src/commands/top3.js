@@ -52,7 +52,7 @@ function getAnswer(replyChatId, messageOptions) {
                   messageOptions);
     } else {
       bot.sendMessage(replyChatId,
-                  "Oops..It seems like you have type the wrong repo name or owner.\n" +
+                  "Oops..It seems like you have typed the wrong repo name or owner.\n" +
                   "It could also be that we have have reached maximum github API calls for the day.\n" +
                   "Thanks for using our bot!",
                   messageOptions);

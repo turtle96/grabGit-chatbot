@@ -3,7 +3,7 @@ var moment = require('moment');
 var request = require('request');
  
 // A case‐insensitive regular expression that matches "/last" 
-var commandRegex = /^\/last\s+(.+)\s+(.+)/i; 
+var commandRegex = /^\/last\s+(.+)\s+(.+)/i;
  
 bot.onText(commandRegex, function(msg, match) { 
 	var repoOwner = match[1];
@@ -42,10 +42,10 @@ bot.onText(commandRegex, function(msg, match) {
 	  }
 	  else {
 	      bot.sendMessage(replyChatId,
-		      "Oops..It seems like you have type the wrong repo name or owner.\n" +
-		      "It could also be that we have have reached maximum github API calls for the day.\n" +
-		      "Thanks for using our bot!",
-		      messageOptions);
+                  "Oops..It seems like you have typed the wrong repo name or owner.\n" +
+                  "It could also be that we have have reached maximum github API calls for the day.\n" +
+                  "Thanks for using our bot!",
+                  messageOptions);
 	  }
 	}
 

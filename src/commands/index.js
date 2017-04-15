@@ -1,3 +1,4 @@
+require('./start.js');
 require('./hello.js');
 require('./help.js');
 require('./top3.js');

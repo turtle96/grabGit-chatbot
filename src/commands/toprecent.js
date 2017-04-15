@@ -23,11 +23,6 @@ bot.onText(commandRegex, function(msg, match) {
 
   var output = getAnswer(replyChatId, messageOptions);
 
-  if (output == "") {
-    output = "Oh no!\nThere's no commits in recent week."
-  }
-
-
 
   bot.sendMessage(replyChatId,
                   output,
@@ -57,6 +52,11 @@ function getAnswer(replyChatId, messageOptions) {
       result.sort(sortByDescCommitCount);
 
       formattedResult = formatResult(result);
+
+      if(formattedResult == ""){
+		formattedResult = "No commits in last 7 days.";
+	}
+
 
       bot.sendMessage(replyChatId,
                   formattedResult,
